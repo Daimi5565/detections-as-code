@@ -1,0 +1,22 @@
+name: Detect Failed Logins
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-detection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Run failed login detection
+        run: |
+          python detect_failed_logins.py
