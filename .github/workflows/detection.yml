@@ -3,20 +3,39 @@ name: Detect Failed Logins
 on:
   push:
     branches:
-      - main
+      - main  # Trigger workflow on pushes to the main branch
 
 jobs:
   run-detection:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Set up the job to run on the latest Ubuntu runner
+
     steps:
+      # Step 1: Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.x'  # Specify the version of Python (you can change this if needed)
 
+      # Step 3: Install dependencies (optional, if you have a requirements.txt file)
+      # If you don't need any dependencies, you can skip this step.
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Remove this if no dependencies are needed
+
+      # Step 4: Run the Python script
       - name: Run failed login detection
         run: |
           python detect_failed_logins.py
+
+      # Optional Step 5: Upload results (if you want to save logs or outputs)
+      # Uncomment this section if you want to upload the results to GitHub for later access
+      # - name: Upload detection results
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: detection-results
+      #     path: ./detection_results/
