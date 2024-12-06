@@ -1,0 +1,15 @@
+title: Detect Failed Login Attempts
+id: 12345
+description: Detects failed login attempts based on status field
+logsource:
+  category: authentication
+  product: linux  # Change this to 'windows' if you're targeting Windows logs
+detection:
+  selection:
+    status: "failed"
+  condition: selection
+fields:
+  - timestamp
+  - user
+  - status
+  - ip
