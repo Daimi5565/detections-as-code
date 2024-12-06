@@ -1,4 +1,4 @@
-echo 'import json
+import json
 
 # Load logs from JSON file
 def load_logs(file_path):
@@ -23,4 +23,4 @@ def print_failed_logins(failed_logins):
 if __name__ == "__main__":
     logs = load_logs("logs.json")
     failed_logins = detect_failed_logins(logs)
-    print_failed_logins(failed_logins)' > detect_failed_logins.py
+    print_failed_logins(failed_logins)
